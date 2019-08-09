@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    
+    </head>
+    <body>
+        <script>
+            function computerPlay(){
+                let choices =['Rock','Paper','Scissor'];
+                let seed = Math.floor(Math.random()*3);
+                return choices[seed];
+            }
+
+            function playerChoice(){
+               let userInput = prompt('Enter your choice');
+               return userInput[0].toUpperCase()+ userInput.slice(1).toLowerCase();
+            }
+
+            function playRound(playerSelection,computerSelection){
+                let winner = ['RockScissor','ScissorPaper','PaperRock'];
+                let choices = playerSelection+computerSelection;
+                if (choices ==winner[0]||choices == winner[1]|| choices ==winner[2])
+                    return [`Congrats! You win,${playerSelection} beats ${computerSelection}`,1];
+ 
+                else if(playerSelection ==computerSelection)
+                {
+                    return [`${playerSelection}, ${computerSelection} It\'s a draw`,0];
+                }
+                else 
+                    return [`You Lose! ${computerSelection} beats ${playerSelection}`,-1];
+            }
+
+            function game(){
+                let score = 0, total=5;
+                for(let x=0;x<5;x++){
+                    let [resultMessage, roundScore] =playRound(playerChoice(),computerPlay());
+                    alert(resultMessage);
+                    if (roundScore ==0) total-=1;
+                    score +=roundScore;
+                }
+                if(score>0)
+                    alert('Congrats!!!! You win the game');
+                else if(score<0)
+                    alert('Sorry:( You lose ');
+                else alert('It\'s a tie');
+
+                alert('Final Score:'+(total+score)/2+'-'+(total-score)/2);
+
+                }
+            game();
+        </script>
+    </body>
+
+</html>
